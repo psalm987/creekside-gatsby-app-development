@@ -94,7 +94,7 @@ const Login = () => {
           >
             Welcome Back
           </Typography>
-          {/* <MyOutlinedInput
+          <MyOutlinedInput
             value={auth.email}
             onChange={handleChange}
             label="Email"
@@ -119,23 +119,6 @@ const Login = () => {
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            }
-          /> */}
-
-          <input
-            placeholder="Email"
-            type="text"
-            value={auth.email}
-            onChange={(event) =>
-              setAuth({ ...auth, email: event.target.value })
-            }
-          />
-          <input
-            placeholder="Password"
-            type="text"
-            value={auth.password}
-            onChange={(event) =>
-              setAuth({ ...auth, password: event.target.value })
             }
           />
           <Typography

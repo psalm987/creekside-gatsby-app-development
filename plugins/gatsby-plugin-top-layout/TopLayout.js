@@ -11,7 +11,6 @@ import AlertState from "../../src/state/alert/AlertState";
 import alertContext from "../../src/state/alert/alertContext";
 import ThemeState from "../../src/state/theme/ThemeState";
 import themeContext from "../../src/state/theme/themeContext";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import userContext from "../../src/state/user/userContext";

@@ -34,7 +34,7 @@ function loadScript(src, position, id) {
   script.setAttribute("id", id);
   script.src = src;
   position.appendChild(script);
-} 
+}
 
 if (typeof window !== "undefined") {
   if (!document.querySelector("#google-maps")) {
@@ -64,12 +64,7 @@ export default function TopLayout(props) {
 }
 
 const BodyHolder = (props) => {
-  const { themeMode, setTheme } = React.useContext(themeContext);
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  React.useEffect(() => {
-    prefersDarkMode && setTheme("dark");
-  }, [prefersDarkMode, setTheme]);
+  const { themeMode } = React.useContext(themeContext);
 
   return (
     <ThemeProvider theme={theme(themeMode)}>

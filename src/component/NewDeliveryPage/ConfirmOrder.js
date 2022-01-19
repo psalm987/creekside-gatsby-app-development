@@ -186,7 +186,7 @@ const ConfirmOrder = ({
             }}
           >
             <Icon />
-            <Typography sx={{}} variant="body1" color="inherit">
+            <Typography variant="body2" color="inherit">
               {distance && distance.replace(" ", "")}
             </Typography>
           </Avatar>

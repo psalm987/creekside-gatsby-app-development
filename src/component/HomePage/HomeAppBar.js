@@ -25,6 +25,8 @@ import { Link } from "gatsby";
 import notificationContext from "../../state/notification/notificationContext";
 
 import MenuIcon from "@mui/icons-material/Menu";
+import useTheme from "@mui/material/styles/useTheme";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const MyIconButton = ({ ...rest }) => (
   <IconButton sx={{ mx: { xs: 0.5, md: 1 } }} {...rest} />
@@ -67,6 +69,9 @@ const MyDrawerContent = () => {
       <ListItem component="a" href="tel:+2347044455667" button>
         <ListItemText primary="Call us" />
       </ListItem>
+      <ListItem component="a" href="https://wa.me/2349023386404" button>
+        <ListItemText primary="Whatsapp" />
+      </ListItem>
       <ListItem component={Link} to="/support" button>
         <ListItemText primary="Support" />
       </ListItem>
@@ -97,15 +102,24 @@ export const MyPermanentDrawer = () => (
   </Drawer>
 );
 
-const MySwipeableDrawer = ({ open, onClose, onOpen }) => (
-  <SwipeableDrawer
-    anchor="left"
-    {...{ open, onClose, onOpen }}
-    sx={{ display: { xs: "block", lg: "none" } }}
-  >
-    <MyDrawerContent />
-  </SwipeableDrawer>
-);
+const MySwipeableDrawer = ({ open, onClose, onOpen }) => {
+  const theme = useTheme();
+  const lgUp = useMediaQuery(theme.breakpoints.up("lg"));
+
+  React.useEffect(() => {
+    lgUp && typeof onClose === "function" && onClose();
+  }, [lgUp, onClose]);
+
+  return (
+    <SwipeableDrawer
+      anchor="left"
+      {...{ open, onClose, onOpen }}
+      sx={{ display: { xs: "block", lg: "none" } }}
+    >
+      <MyDrawerContent />
+    </SwipeableDrawer>
+  );
+};
 
 const HomeAppBar = ({ openSearch }) => {
   const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -157,17 +171,18 @@ const HomeAppBar = ({ openSearch }) => {
               <Button
                 variant="text"
                 onClick={openSearch}
+                startIcon={<SearchIcon />}
                 sx={{
                   bgcolor: lightMode ? "grey.100" : "grey.900",
                   border: 1,
                   borderColor: "divider",
                   m: 1,
+                  display: { xs: "none", sm: "inline-flex" },
                 }}
               >
-                <SearchIcon sx={{ mr: 1 }} />
                 <Typography
                   variant="subtitle1"
-                  color={"text.secondary"}
+                  color="text.secondary"
                   sx={{
                     textTransform: "none",
                     width: { xs: "150px", md: "180px" },
@@ -177,6 +192,12 @@ const HomeAppBar = ({ openSearch }) => {
                   Track delivery...
                 </Typography>
               </Button>
+              <MyIconButton
+                onClick={openSearch}
+                sx={{ display: { xs: "inline-flex", sm: "none" } }}
+              >
+                <SearchIcon />
+              </MyIconButton>
               <MyIconButton component={Link} to="/notifications">
                 <Badge
                   badgeContent={unReadNotificationsLength}
